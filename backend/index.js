@@ -21,10 +21,11 @@ const gameSchema = new mongoose.Schema({
 
 const userSchema = new mongoose.Schema({
   username: String,
-  email: String,
   password: String,
+  name: String,
+  email: String,
+  phone: String,
   ownedGames: [String],
-  wishlist: [String],
 });
 
 
@@ -50,14 +51,42 @@ app.get('/api/games',async(req,res)=>{
         res.status(500).send(err);
     }
 });
-
-app.post('/api/users', async (req, res) => {
-  const user = new User(req.body);
+//added by lior
+app.post('/api/login', async (req, res) => {
+  const { username, password } = req.body;
+  
   try {
-    await user.save();
-    res.status(201).send(user);
-  } catch (err) {
-    res.status(400).send(err);
+    const user = await User.findOne({ username: username, password: password });
+
+    if (user) {
+      res.status(200).json(user);
+    } else {
+      res.status(401).json({ message: 'Invalid username or password' });
+    }
+  } catch (error) {
+    console.error('Error during login:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+app.post('/api/register-user', async (req, res) => {
+  const { username, password, name, email, phone } = req.body;
+
+  try {
+    // Check if the username already exists
+    const existingUser = await User.findOne({ username });
+    if (existingUser) {
+      return res.status(400).json({ message: 'Username already exists' });
+    }
+
+    // Create a new user
+    const newUser = new User({ username, password, name, email, phone, ownedGames: [] });
+    await newUser.save();
+
+    res.status(201).json(newUser);
+  } catch (error) {
+    console.error('Error registering user:', error);
+    res.status(500).json({ message: 'Internal server error' });
   }
 });
 

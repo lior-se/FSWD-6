@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {createUser, fetchUsers } from '../server';
+import {createUser } from '../server';
 import { useNavigate} from 'react-router-dom';
 import '../styles/Login.css';
 
@@ -19,41 +19,27 @@ const Register = () => {
       return;
     }
 
-    try {
-      const users = await fetchUsers();
-      const userExists = users.some(user => user.username === username);
-
-      if (userExists) {
-        alert('Username already exists');
-      } else {
-        setStep(2);
-      }
-    } catch (error) {
-      console.error('Error checking username:', error);
-    }
-  };
-//merge les 2 functions
-  const handleCompleteRegister = async (e) => {
-    e.preventDefault();
     const newUser = {
-      id: Date.now().toString(),
       username,
-      website: password,
+      password,
       name,
       email,
       phone,
-      address,
+      ownedGames: []
     };
+
 
     try {
       await createUser(newUser);
       localStorage.setItem('user', JSON.stringify(newUser));
       alert('Registration successful');
-      navigate('/home');
+      //navigate('/store');
     } catch (error) {
+      alert('Error registering user');
       console.error('Error registering user:', error);
     }
   };
+
 
   return (
     <div className='login-container'>
@@ -72,7 +58,6 @@ const Register = () => {
             <label className="label">Confirm Password:</label>
             <input type="password" className="input" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
           </div>
-          <button type="submit" className="button">Next</button>
           <div>
             <label className="label">Name:</label>
             <input type="text" className="input" value={name} onChange={(e) => setName(e.target.value)} required />

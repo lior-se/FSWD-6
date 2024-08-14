@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { fetchUsers } from '../server';
+import { loginUser } from '../server';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Login.css';
 
@@ -11,21 +11,18 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const users = await fetchUsers();
-      const user = users.find(user => user.username === username && user.website === password);
-
+      const user = await loginUser(username, password);
+  
       if (user) {
         localStorage.setItem('user', JSON.stringify(user));
         alert('Login successful');
-        navigate('/home');
-      } else {
-        alert('Invalid username or password');
+        //navigate('/store');
       }
     } catch (error) {
+      alert('Invalid username or password');
       console.error('Error logging in:', error);
     }
   };
-
   return (
     <div className="login-container">
       <div className="form">
