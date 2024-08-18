@@ -1,0 +1,68 @@
+/* Global reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Style for the body */
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Sticky Navbar */
+  .navbar {
+    position: fixed; /* Fixed position to keep it at the top of the screen */
+    top: 0; /* Navbar sticks to the top of the viewport */
+    left: 0; /* Align to the left edge */
+    width: 100%; /* Full width */
+    background-color: #333; /* Dark background color */
+    z-index: 1000; /* Ensures the navbar stays on top of other elements */
+    padding: 10px 0; /* Padding for better spacing */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Adds a shadow for depth */
+  }
+  
+  /* Navbar list */
+  .nav-list {
+    list-style-type: none; /* Remove bullets */
+    display: flex; /* Display items horizontally */
+    justify-content: center; /* Center the list items */
+  }
+  
+  /* Navbar items */
+  .nav-item {
+    margin: 0 15px; /* Spacing between items */
+    color: white; /* Text color */
+    cursor: pointer; /* Pointer cursor on hover */
+    padding: 10px 15px; /* Padding inside the items */
+    text-transform: uppercase; /* Uppercase text */
+    font-weight: bold; /* Bold text */
+    text-decoration: none; /* Remove underline */
+    transition: background-color 0.3s ease; /* Smooth background color change */
+  }
+  
+  /* Navbar item hover effect */
+  .nav-item:hover {
+    background-color: #555; /* Slightly lighter background on hover */
+  }
+  
+  /* Responsive design for smaller screens */
+  @media (max-width: 768px) {
+    .nav-list {
+      flex-direction: column; /* Stack items vertically */
+      align-items: center; /* Center the items */
+    }
+  
+    .nav-item {
+      margin: 10px 0; /* Adjust margin for vertical stacking */
+    }
+  }
+  
+  /* Additional fix to ensure content below the navbar isn't hidden */
+  .main-app {
+    padding-top: 50px; /* Adjust this value based on the height of your navbar */
+  }
+  
