@@ -3,7 +3,7 @@ import {createUser } from '../server';
 import { useNavigate} from 'react-router-dom';
 import '../styles/Login.css';
 
-const Register = () => {
+const RegisterUser = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -44,7 +44,7 @@ const Register = () => {
   return (
     <div className='login-container'>
     <div className="form">
-      <h2 className="h2">Register</h2>
+      <h2 className="h2">Register a New User</h2>
         <form onSubmit={handleUserRegister}>
           <div>
           <label className="label">Username:</label>
@@ -77,4 +77,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default RegisterUser;

@@ -28,10 +28,20 @@ const userSchema = new mongoose.Schema({
   ownedGames: [String],
 });
 
+const shopSchema = new mongoose.Schema({
+  shopname: String,
+  password: String,
+  name: String,
+  email: String,
+  phone: String,
+  adress: String,
+  Games: [String],
+});
+
 
 const Game = mongoose.model('Game', gameSchema,'Games');
 const User = mongoose.model('User', userSchema,'Users');
-
+const Shop = mongoose.model('Shop', shopSchema,'Shops');
 
 app.post('/api/games', async (req, res) => {
   const game = new Game(req.body);
@@ -84,6 +94,27 @@ app.post('/api/register-user', async (req, res) => {
     await newUser.save();
 
     res.status(201).json(newUser);
+  } catch (error) {
+    console.error('Error registering user:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+app.post('/api/register-shop', async (req, res) => {
+  const { shopname, password, name, email, phone,adress } = req.body;
+
+  try {
+    // Check if the username already exists
+    const existingUser = await Shop.findOne({ shopname });
+    if (existingUser) {
+      return res.status(400).json({ message: 'Username already exists' });
+    }
+
+    // Create a new user
+    const newShop = new Shop({ shopname, password, name, email, phone, adress, Games: [] });
+    await newShop.save();
+
+    res.status(201).json(newShop);
   } catch (error) {
     console.error('Error registering user:', error);
     res.status(500).json({ message: 'Internal server error' });
