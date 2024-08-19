@@ -5,7 +5,7 @@ import Home from './components/Home';
 import RegisterUser from './components/RegisterUser';
 //import RegisterShop from './components/RegisterShop';
 import RegisterShop from './components/RegisterShop';
-import ShopApp from './components/ShopApp';
+import UserApp from './components/UserApp';
 
 const App = () => {
   return (
@@ -15,7 +15,7 @@ const App = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/register-user" element={<RegisterUser />} />
       <Route path="/register-shop" element={<RegisterShop />} />
-      <Route path="/store/*" element={<ShopApp />} />
+      <Route path="/user/*" element={<UserApp />} />
       </Routes>
     </Router>
   );
