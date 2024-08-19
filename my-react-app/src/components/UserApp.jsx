@@ -29,9 +29,9 @@ const Navbar = () => {
     return (
         <nav className="navbar">
         <ul className="nav-list">
+            <li className='nav-item' onClick={() => navigate('/user/store')}> Store </li>
             <li className="nav-item" onClick={() => navigate('/user/collection')}>Library</li>
             <li className="nav-item" onClick={() => navigate('/user/profil')}>Profile</li>
-            <li className='nav-item' onClick={() => navigate('/user/store')}> Store </li>
         </ul>
         </nav>
     );
