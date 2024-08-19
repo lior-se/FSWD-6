@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import UserProfil from './UserProfil';
 import GameStore from './GameStore';
 import GameCollection from './GameCollection';
+import GamePage from './GamePage'; 
 import '../styles/Navbar.css'
 const UserApp = () => {
     //const navigate = useNavigate();
@@ -13,9 +14,10 @@ const UserApp = () => {
             <Navbar />
             <div className="content">
                 <Routes>
-                    <Route path="Profil" element={<UserProfil />} />
-                    <Route path="Store" element={<GameStore />} />
-                    <Route path="Collection" element={<GameCollection />} />
+                    <Route path="profil" element={<UserProfil />} />
+                    <Route path="store" element={<GameStore />} />
+                    <Route path="store/:gameId" element={<GamePage />} />
+                    <Route path="collection" element={<GameCollection />} />
                     <Route path="*" element={<h1>404 - Not Found</h1>} />
                 </Routes>
             </div>
