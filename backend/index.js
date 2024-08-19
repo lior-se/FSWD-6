@@ -50,6 +50,55 @@ app.listen(5000, () => {
   console.log('Server is running on port 5000');
 });
 
+//Test functions
+
+app.post('/api/games', async (req, res) => {
+  const { title, developer, releaseDate, description, media, cover, genres, price } = req.body;
+
+  try {
+    const newGame = new Game({
+      title,
+      developer,
+      releaseDate,
+      description,
+      media,
+      cover,
+      genres,
+      price,
+    });
+
+    await newGame.save();
+    res.status(201).json(newGame);
+  } catch (error) {
+    console.error('Error adding game:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+// Route to get a game by its ID
+app.get('/api/games/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const game = await Game.findById(id);
+
+    if (game) {
+      res.status(200).json(game);
+    } else {
+      res.status(404).json({ message: 'Game not found' });
+    }
+  } catch (error) {
+    console.error('Error fetching game by ID:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+
+
+
+
+
+
 //added by lior
 app.post('/api/login', async (req, res) => {
   const { username, password } = req.body;

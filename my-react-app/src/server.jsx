@@ -24,3 +24,20 @@ export const createShop = async (shop) => {
   return postRequest('/api/register-shop', shop);
 };
 
+export const createGame = async (game) => {
+  return postRequest('/api/games', game);
+};
+
+const getRequest = async (endpoint) => {
+  try {
+    const response = await axios.get(`${API_URL}${endpoint}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error in ${endpoint}:`, error);
+    throw error;
+  }
+};
+
+export const gamedataretriever = async (gameId) => {
+  return getRequest(`/api/games/${gameId}`);
+};
