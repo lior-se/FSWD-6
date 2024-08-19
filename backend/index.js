@@ -15,6 +15,9 @@ const gameSchema = new mongoose.Schema({
   title: String,
   developer: String,
   releaseDate: String,
+  description: String,
+  media: String,
+  cover: String,
   genres: [String],
   price: Number,
 });
@@ -43,24 +46,10 @@ const Game = mongoose.model('Game', gameSchema,'Games');
 const User = mongoose.model('User', userSchema,'Users');
 const Shop = mongoose.model('Shop', shopSchema,'Shops');
 
-app.post('/api/games', async (req, res) => {
-  const game = new Game(req.body);
-  try {
-    await game.save();
-    res.status(201).send(game);
-  } catch (err) {
-    res.status(400).send(err);
-  }
+app.listen(5000, () => {
+  console.log('Server is running on port 5000');
 });
 
-app.get('/api/games',async(req,res)=>{
-    try{
-       const games = await Game.find();
-       res.status(200).send(games);
-    }catch (err) {
-        res.status(500).send(err);
-    }
-});
 //added by lior
 app.post('/api/login', async (req, res) => {
   const { username, password } = req.body;
@@ -121,6 +110,13 @@ app.post('/api/register-shop', async (req, res) => {
   }
 });
 
-app.listen(5000, () => {
-  console.log('Server is running on port 5000');
+app.get('/api/games/latest', async (req, res) => {
+  try {
+    const latestGames = await Game.find().sort({ releaseDate: -1 }).limit(6); // Adjust the limit as needed
+    res.status(200).json(latestGames);
+  } catch (error) {
+    console.error('Error fetching latest games:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
 });
+
