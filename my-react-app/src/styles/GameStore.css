@@ -1,0 +1,127 @@
+.game-store {
+    display: flex; 
+    flex-direction: column;
+    align-items: center; 
+    height: 90vh; 
+    width: 100vw; 
+    background-color: #f0f0f0;
+  }
+  
+  .latest-releases {
+    margin-left: -600px;
+    margin-bottom: 0px;
+    font-size: 24px;
+    color: #333;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 32px;
+    color: #333;
+  }
+  
+  .game-carousel {
+    max-width: 800px;
+    margin-bottom: 40px;
+  }
+  
+  .game-slide {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+  }
+  
+  .game-cover img {
+    max-width: 250px;
+    border-radius: 10px;
+  }
+  
+  .game-info {
+    flex: 1;
+    padding-left: 20px;
+  }
+  
+  .game-info h2 {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+  }
+  
+  .game-info p {
+    margin: 10px 0;
+    color: #666;
+  }
+  
+  .filter-buttons {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  
+  .filter-buttons button {
+    padding: 10px 15px;
+    margin: 0 5px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .filter-buttons button.active {
+    background-color: #0056b3;
+  }
+  
+  .filter-buttons button:hover {
+    background-color: #0056b3;
+  }
+  
+  .game-list {
+    width: 100%;
+    max-width: 800px;
+    margin-top: 20px;
+  }
+  
+  .game-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ccc;
+    background-color: #fff;
+  }
+  
+  .game-list-cover img {
+    width: 160px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 3px;
+  }
+  
+  .game-list-info {
+    flex: 1;
+    padding-left: 20px;
+  }
+  
+  .game-list-info h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .game-list-info p {
+    margin: 5px 0;
+    color: #666;
+  }
+  
+  .game-list-price p {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }
+  
