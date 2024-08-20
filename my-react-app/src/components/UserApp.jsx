@@ -16,7 +16,7 @@ const UserApp = () => {
                 <Routes>
                     <Route path="profil" element={<UserProfil />} />
                     <Route path="store" element={<GameStore />} />
-                    <Route path="store/:gameId" element={<GamePage />} />
+                    <Route path="store/:id" element={<GamePage />} />
                     <Route path="collection" element={<GameCollection />} />
                     <Route path="*" element={<h1>404 - Not Found</h1>} />
                 </Routes>

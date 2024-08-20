@@ -16,7 +16,7 @@ const gameSchema = new mongoose.Schema({
   developer: String,
   releaseDate: String,
   description: String,
-  media: String,
+  media: [String],
   cover: String,
   genres: [String],
   price: Number,
@@ -76,22 +76,7 @@ app.post('/api/games', async (req, res) => {
 });
 
 // Route to get a game by its ID
-app.get('/api/games/:id', async (req, res) => {
-  const { id } = req.params;
 
-  try {
-    const game = await Game.findById(id);
-
-    if (game) {
-      res.status(200).json(game);
-    } else {
-      res.status(404).json({ message: 'Game not found' });
-    }
-  } catch (error) {
-    console.error('Error fetching game by ID:', error);
-    res.status(500).json({ message: 'Internal server error' });
-  }
-});
 
 
 
@@ -165,6 +150,28 @@ app.get('/api/games/latest', async (req, res) => {
     res.status(200).json(latestGames);
   } catch (error) {
     console.error('Error fetching latest games:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+app.get('/api/games/:id', async (req, res) => {
+  const { id } = req.params;
+
+  // Check if the provided id is a valid ObjectId
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ message: 'Invalid game ID' });
+  }
+
+  try {
+    const game = await Game.findById(id);
+
+    if (game) {
+      res.status(200).json(game);
+    } else {
+      res.status(404).json({ message: 'Game not found' });
+    }
+  } catch (error) {
+    console.error('Error fetching game by ID:', error);
     res.status(500).json({ message: 'Internal server error' });
   }
 });

@@ -49,3 +49,15 @@ const getRequest = async (endpoint) => {
 export const gamedataretriever = async (gameId) => {
   return getRequest(`/api/games/${gameId}`);
 };
+
+
+export const getGameById = async (id) => {
+  console.log(id);
+  try {
+      const response = await axios.get(`${API_URL}/api/games/${id}`);
+      return response.data;
+  } catch (error) {
+      console.error('Error fetching game by ID:', error);
+      throw error;
+  }
+};

@@ -1,17 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { getGameById } from '../server'; // Import a function to fetch a game by ID
 import '../styles/GamePage.css';
 
-const GamePage = ({ gameData }) => {
-    const [displayedImage, setDisplayedImage] = useState(gameData.cover);
-  
-    const handleThumbnailClick = (mediaUrl) => {
-      setDisplayedImage(mediaUrl);
-    };
-  
+const GamePage = () => {
+    const { id } = useParams(); // Get gameId from URL
+    const [gameData, setGameData] = useState(null);
+    const [displayedImage, setDisplayedImage] = useState('');
+
+    useEffect(() => {
+        const fetchGame = async () => {
+            try {
+              console.log("ID du gamepage")
+              console.log(id)
+                const game = await getGameById(id); // Fetch the game by ID
+                setGameData(game);
+                setDisplayedImage(game.cover);
+            } catch (error) {
+                console.error('Error fetching game data:', error);
+            }
+        };
+
+        fetchGame();
+    }, [id]);
+
     if (!gameData) {
-      return <div>Loading...</div>; // Show a loading indicator if no game data is passed
+        return <div>Loading...</div>; // Show loading state while fetching data
     }
-  
+
+    const handleThumbnailClick = (mediaUrl) => {
+        setDisplayedImage(mediaUrl);
+    };
+
     return (
       <div className="game-page">
         <div className="game-header">
@@ -31,7 +51,7 @@ const GamePage = ({ gameData }) => {
             
             <div className="purchase-info">
               <span>Base Game</span>
-              <span className="price">₹{gameData.price}</span>
+              <span className="price">${gameData.price}</span>
               <button className="pre-purchase">Pre-Purchase</button>
               <button>Add To Cart</button>
               <button>Add to Wishlist</button>
