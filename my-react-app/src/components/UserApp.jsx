@@ -4,6 +4,7 @@ import UserProfil from './UserProfil';
 import GameStore from './GameStore';
 import GameCollection from './GameCollection';
 import GamePage from './GamePage'; 
+import ShopGamePage from './ShopGamePage';
 import '../styles/Navbar.css'
 const UserApp = () => {
     //const navigate = useNavigate();
@@ -18,6 +19,7 @@ const UserApp = () => {
                     <Route path="store" element={<GameStore />} />
                     <Route path="store/:id" element={<GamePage />} />
                     <Route path="collection" element={<GameCollection />} />
+                    <Route path="edit/:id" element={<ShopGamePage />} />
                     <Route path="*" element={<h1>404 - Not Found</h1>} />
                 </Routes>
             </div>

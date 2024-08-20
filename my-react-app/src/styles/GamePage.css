@@ -1,10 +1,4 @@
-body, html {
-    margin: 0;
-    padding: 0;
-    width: 100vw;
-    height: 100vh;
-    box-sizing: border-box;
-}
+
   
 .game-page {
     font-family: Arial, sans-serif;
@@ -12,9 +6,11 @@ body, html {
     background-color: #1b1b1d;
     padding: 20px;
     width: 100vw;
+    margin-top:20px;
     height: calc(100vh - 70px); /* Adjust height to account for the navbar */
     display: flex;
     flex-direction: column;
+    padding-bottom: 20px;
 }
   
 .game-header {
@@ -137,3 +133,16 @@ button {
     margin-right: 10px;
     border-radius: 5px;
 }
+
+.game-slot {
+    display: flex;
+    background-color: #333;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer; /* Make the game slots appear clickable */
+  }
+  
+  .game-slot:hover {
+    background-color: #444; /* Optional: Add a hover effect */
+  }
+  

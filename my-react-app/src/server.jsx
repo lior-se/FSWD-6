@@ -61,3 +61,17 @@ export const getGameById = async (id) => {
       throw error;
   }
 };
+
+const putRequest = async (endpoint, data) => {
+  try {
+    const response = await axios.put(`${API_URL}${endpoint}`, data);
+    return response.data;
+  } catch (error) {
+    console.error(`Error in ${endpoint}:`, error);
+    throw error;
+  }
+};
+
+export const updateGame = async (id, gameData) => {
+  return putRequest(`/api/games/${id}`, gameData);
+};
