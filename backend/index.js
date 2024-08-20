@@ -37,7 +37,7 @@ const shopSchema = new mongoose.Schema({
   name: String,
   email: String,
   phone: String,
-  adress: String,
+  address: String,
   Games: [String],
 });
 
@@ -89,18 +89,29 @@ app.post('/api/login', async (req, res) => {
   const { username, password } = req.body;
   
   try {
-    const user = await User.findOne({ username: username, password: password });
-
+    // First, try to find in User collection
+    let user = await User.findOne({ username: username, password: password });
+    console.log(user)
     if (user) {
-      res.status(200).json(user);
-    } else {
-      res.status(401).json({ message: 'Invalid username or password' });
+      return res.status(200).json(user);
     }
+
+    // If not found in User, try to find in Shop collection
+    let shop = await Shop.findOne({ shopname: username, password: password });
+    console.log(shop)
+    if (shop) {
+      return res.status(200).json(shop);
+    }
+
+    // If neither found, return an error
+    res.status(401).json({ message: 'Invalid username or password' });
+
   } catch (error) {
     console.error('Error during login:', error);
     res.status(500).json({ message: 'Internal server error' });
   }
 });
+
 
 app.post('/api/register-user', async (req, res) => {
   const { username, password, name, email, phone } = req.body;
@@ -108,7 +119,8 @@ app.post('/api/register-user', async (req, res) => {
   try {
     // Check if the username already exists
     const existingUser = await User.findOne({ username });
-    if (existingUser) {
+    const existingShop = await Shop.findOne({ shopname: username });
+    if (existingUser || existingShop) {
       return res.status(400).json({ message: 'Username already exists' });
     }
 
@@ -124,17 +136,18 @@ app.post('/api/register-user', async (req, res) => {
 });
 
 app.post('/api/register-shop', async (req, res) => {
-  const { shopname, password, name, email, phone,adress } = req.body;
+  const { shopname, password, name, email, phone,address } = req.body;
 
   try {
     // Check if the username already exists
-    const existingUser = await Shop.findOne({ shopname });
-    if (existingUser) {
+    const existingShop = await Shop.findOne({ shopname });
+    const existingUser = await User.findOne({ username: shopname });
+    if (existingUser || existingShop) {
       return res.status(400).json({ message: 'Username already exists' });
     }
 
     // Create a new user
-    const newShop = new Shop({ shopname, password, name, email, phone, adress, Games: [] });
+    const newShop = new Shop({ shopname, password, name, email, phone, address, Games: [] });
     await newShop.save();
 
     res.status(201).json(newShop);

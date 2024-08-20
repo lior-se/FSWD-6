@@ -16,7 +16,13 @@ const Login = () => {
       if (user) {
         localStorage.setItem('user', JSON.stringify(user));
         alert('Login successful');
-        navigate('/user/store');
+        
+        // Navigate based on the type of user
+        if (user.address) {
+          navigate('/shop');
+        } else {
+          navigate('/user/store');
+        }
       }
     } catch (error) {
       alert('Invalid username or password');

@@ -10,7 +10,7 @@ const RegisterShop = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [adress, setAdress] = useState('');
+  const [address, setAdress] = useState('');
   const navigate = useNavigate();
 
   const handleShopRegister = async (e) => {
@@ -26,7 +26,7 @@ const RegisterShop = () => {
       name,
       email,
       phone,
-      adress,
+      address,
       Games: []
     };
 
@@ -35,7 +35,7 @@ const RegisterShop = () => {
       await createShop(newShop);
       localStorage.setItem('shop', JSON.stringify(newShop));
       alert('Registration successful');
-      //navigate('/store');
+      navigate('/shop');
     } catch (error) {
       alert('Error registering user');
       console.error('Error registering user:', error);
@@ -73,8 +73,8 @@ const RegisterShop = () => {
             <input type="text" className="input" value={phone} onChange={(e) => setPhone(e.target.value)} required />
           </div>
           <div>
-            <label className="label">Adress:</label>
-            <input type="text" className="input" value={adress} onChange={(e) => setAdress(e.target.value)} required />
+            <label className="label">address:</label>
+            <input type="text" className="input" value={address} onChange={(e) => setAdress(e.target.value)} required />
           </div>
           <button type="submit" className="button">Complete Registration</button>
         </form>

@@ -33,7 +33,7 @@ const RegisterUser = () => {
       await createUser(newUser);
       localStorage.setItem('user', JSON.stringify(newUser));
       alert('Registration successful');
-      navigate('/store');
+      navigate('/user/store');
     } catch (error) {
       alert('Error registering user');
       console.error('Error registering user:', error);
