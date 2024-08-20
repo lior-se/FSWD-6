@@ -189,3 +189,28 @@ app.get('/api/games/:id', async (req, res) => {
   }
 });
 
+//Update a game 
+// Add this route to your backend code
+
+app.put('/api/games/:id', async (req, res) => {
+  const { id } = req.params;
+  const updateData = req.body;
+
+  // Check if the provided id is a valid ObjectId
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ message: 'Invalid game ID' });
+  }
+
+  try {
+    const updatedGame = await Game.findByIdAndUpdate(id, updateData, { new: true });
+
+    if (updatedGame) {
+      res.status(200).json(updatedGame);
+    } else {
+      res.status(404).json({ message: 'Game not found' });
+    }
+  } catch (error) {
+    console.error('Error updating game:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});

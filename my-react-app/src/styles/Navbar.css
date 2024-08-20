@@ -63,6 +63,6 @@
   
   /* Additional fix to ensure content below the navbar isn't hidden */
   .main-app {
-    padding-top: 50px; /* Adjust this value based on the height of your navbar */
+    padding-top: 40px; /* Adjust this value based on the height of your navbar */
   }
   

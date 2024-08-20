@@ -1,0 +1,52 @@
+.game-collection-page {
+    margin-top: 18px;
+    font-family: Arial, sans-serif;
+    background-color: #1b1b1d;
+    width: 100vw;
+    height: 90vh;
+    padding: 20px;
+    padding-bottom: 100px;
+  }
+  
+  .game-collection-page h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .game-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 games per row */
+    gap: 20px;
+  }
+  
+  .game-slot {
+    display: flex;
+    background-color: #333;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  
+  .game-cover {
+    width: 100px;
+    height: auto;
+    border-radius: 5px;
+  }
+  
+  .game-info {
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .game-title {
+    font-size: 1.2rem;
+    margin: 0;
+    color:cyan !important;
+  }
+  
+  .game-developer {
+    font-size: 1rem;
+    color: #ccc;
+  }
+  
