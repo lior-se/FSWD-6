@@ -75,3 +75,11 @@ const putRequest = async (endpoint, data) => {
 export const updateGame = async (id, gameData) => {
   return putRequest(`/api/games/${id}`, gameData);
 };
+
+export const updateUserInDatabase = async (userData) => {
+  return putRequest(`/api/users/${userData.username}`, userData);
+};
+
+export const updateShopInDatabase = async (updatedShop) =>{
+  return putRequest(`/api/shops/${updatedShop.shopname}`, updatedShop);
+};

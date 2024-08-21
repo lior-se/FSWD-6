@@ -214,3 +214,44 @@ app.put('/api/games/:id', async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 });
+
+app.put('/api/users/:username', async (req, res) => {
+  const { username } = req.params;
+  const { name, email, phone, password } = req.body;
+
+  try {
+    const updatedUser = await User.findOneAndUpdate(
+      { username: username },
+      { name, email, phone, password },
+      { new: true }
+    );
+    if (!updatedUser) {
+      return res.status(404).send('User not found');
+    }
+    res.json(updatedUser);
+  } catch (error) {
+    console.error('Error updating user:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+
+app.put('/api/shops/:shopname', async (req, res) => {
+  const { shopname } = req.params;
+  const { name, email, phone, address, password } = req.body;
+
+  try {
+    const updatedShop = await Shop.findOneAndUpdate(
+      { shopname: shopname },
+      { name, email, phone, address, password },
+      { new: true }
+    );
+    if (!updatedShop) {
+      return res.status(404).send('Shop not found');
+    }
+    res.json(updatedShop);
+  } catch (error) {
+    console.error('Error updating shop:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});

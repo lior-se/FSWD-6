@@ -1,0 +1,69 @@
+
+  .user-profile-page {
+    
+    font-family: Arial, sans-serif;
+    color: white;
+    background-color: #1b1b1d;
+    width:100vw;
+    height: 100vh;
+    padding: 20px;
+    margin-top: 10px; /* Adjust based on the navbar height */
+  }
+  
+  .user-profile-page h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .user-profile {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    margin: auto;
+  }
+  
+  .user-profile-field {
+    margin-bottom: 20px;
+  }
+  
+  .user-profile-field label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .user-profile-field input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #444;
+    color: white;
+  }
+  
+  .user-profile-field input[disabled] {
+    background-color: #555;
+    cursor: not-allowed;
+  }
+  
+  button {
+    background-color: #5A67D8;
+    color: green;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+  }
+  
+  button:hover {
+    background-color: #6b78e8;
+  }
+  .ProfBut{
+    background-color: darkgray;
+    color:#444;
+  }
+  #passwordcheck{
+    margin-top:10px;
+  }

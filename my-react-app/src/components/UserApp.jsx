@@ -22,7 +22,7 @@ const UserApp = () => {
             <Navbar />
             <div className="content">
                 <Routes>
-                    <Route path="profile" element={<UserProfile />} />
+                    <Route path="profil" element={<UserProfile />} />
                     <Route path="store" element={<GameStore />} />
                     <Route path="store/:id" element={<GamePage />} />
                     <Route path="collection" element={<GameCollection />} />
