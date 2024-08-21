@@ -91,14 +91,14 @@ app.post('/api/login', async (req, res) => {
   try {
     // First, try to find in User collection
     let user = await User.findOne({ username: username, password: password });
-    console.log(user)
+    //console.log(user)
     if (user) {
       return res.status(200).json(user);
     }
 
     // If not found in User, try to find in Shop collection
     let shop = await Shop.findOne({ shopname: username, password: password });
-    console.log(shop)
+    //console.log(shop)
     if (shop) {
       return res.status(200).json(shop);
     }
@@ -253,5 +253,34 @@ app.put('/api/shops/:shopname', async (req, res) => {
   } catch (error) {
     console.error('Error updating shop:', error);
     res.status(500).send('Internal Server Error');
+  }
+});
+
+// Add a route to update the shop's Games array
+app.put('/api/shop/add-game/:shopId', async (req, res) => {
+  const { shopId } = req.params;
+  const { gameId } = req.body;
+  console.log("gameID: %s",gameId);
+  console.log("shopID: %s",shopId);
+  // Check if the provided shopId is valid
+  if (!mongoose.Types.ObjectId.isValid(shopId)) {
+    return res.status(400).json({ message: 'Invalid shop ID' });
+  }
+
+  try {
+    const shop = await Shop.findByIdAndUpdate(
+      shopId,
+      { $push: { Games: gameId } }, // Push the new game ID to the Games array
+      { new: true } // Return the updated document
+    );
+
+    if (shop) {
+      res.status(200).json(shop);
+    } else {
+      res.status(404).json({ message: 'Shop not found' });
+    }
+  } catch (error) {
+    console.error('Error updating shop:', error);
+    res.status(500).json({ message: 'Internal server error' });
   }
 });

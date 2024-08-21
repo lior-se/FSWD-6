@@ -30,7 +30,10 @@ function ShopCollection() {
     <div className="shop-collection">
       <div className="banner">
         <h1 className="shop-name">{shop.shopname}</h1>
-        <button className="add-game-button">Add a New Game</button>
+        <button className="add-game-button"
+        onClick={() => navigate('/shop/add-game')}
+        >
+          Add a New Game</button>
       </div>
       <div className="shop-games-container">
         {games.map((game) => (
