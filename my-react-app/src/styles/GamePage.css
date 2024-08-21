@@ -146,3 +146,17 @@ button {
     background-color: #444; /* Optional: Add a hover effect */
   }
   
+  .play-button {
+    background-color: #28a745; /* Green for play */
+    color: white;
+    padding: 10px 20px;
+    margin-left: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .play-button:hover {
+    background-color: #218838;
+  }
+  

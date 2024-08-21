@@ -104,8 +104,10 @@ const UserProfile = () => {
             <div>
               <input
                 type={showPassword ? "text" : "password"}
+                name="password"
                 value={showPassword ? user.password : '********'}
-                readOnly
+                onChange={handleChange}
+                readOnly={!showPassword}
               />
               {!showPassword && (
                 <>
