@@ -2,8 +2,10 @@ import { BrowserRouter as Router, Routes, Route,useNavigate } from 'react-router
 import React, { useEffect } from 'react';
 import UserProfil from './UserProfile';
 import ShopGamePage from './ShopGamePage';
-import '../styles/Navbar.css'
 import ShopCollection from './ShopCollection';
+import AddGame from './AddGame';
+import '../styles/Navbar.css'
+
 const ShopApp = () => {
     const navigate = useNavigate();
 
@@ -22,6 +24,7 @@ const ShopApp = () => {
                     <Route path="profile" element={<UserProfil />} />
                     <Route path="collection" element={<ShopCollection />} />
                     <Route path="collection/:id" element={<ShopGamePage />} />
+                    <Route path="add-game" element={<AddGame />} />
                     <Route path="*" element={<h1>404 - Not Found</h1>} />
                 </Routes>
             </div>

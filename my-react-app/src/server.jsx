@@ -36,6 +36,17 @@ export const getLatestGames = async () => {
   return postRequest('/api/games', game);
 };
 
+export const updateShopGames = async (shopId, gameId) => {
+  console.log("update");
+  try {
+    const response = await axios.put(`${API_URL}/api/shop/add-game/${shopId}`, { gameId });
+    return response.data;
+  } catch (error) {
+    console.error(`Error updating shop games:`, error);
+    throw error;
+  }
+};
+
 const getRequest = async (endpoint) => {
   try {
     const response = await axios.get(`${API_URL}${endpoint}`);
