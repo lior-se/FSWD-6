@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Await, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { getGameById } from "../server";
 import '../styles/GameCollection.css'
 

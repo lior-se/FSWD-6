@@ -19,7 +19,7 @@ const Login = () => {
         
         // Navigate based on the type of user
         if (user.address) {
-          navigate('/shop');
+          navigate('/shop/collection');
         } else {
           navigate('/user/store');
         }
