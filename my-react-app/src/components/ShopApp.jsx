@@ -1,12 +1,18 @@
-import { BrowserRouter as Router, Routes, Route, Link,useNavigate } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route,useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
 import UserProfil from './UserProfile';
 import ShopGamePage from './ShopGamePage';
 import '../styles/Navbar.css'
 import ShopCollection from './ShopCollection';
-const UserApp = () => {
-    //const navigate = useNavigate();
-    //const [activeSection, setActiveSection] = useState(null);
+const ShopApp = () => {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (!user || !user.shopname) {
+            navigate('/'); // Redirect to home if no shopname is found
+        }
+    }, [navigate]);
     
     return (
         <div className="main-app">
@@ -37,4 +43,4 @@ const Navbar = () => {
 }
 
 
-export default UserApp;
+export default ShopApp;

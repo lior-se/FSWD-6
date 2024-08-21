@@ -7,9 +7,16 @@ import GamePage from './GamePage';
 import ShopGamePage from './ShopGamePage';
 import '../styles/Navbar.css'
 const UserApp = () => {
-    //const navigate = useNavigate();
+    const navigate = useNavigate();
     //const [activeSection, setActiveSection] = useState(null);
     
+    useEffect(() => {
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (!user || !user.username) {
+            navigate('/'); 
+        }
+    }, [navigate]);
+
     return (
         <div className="main-app">
             <Navbar />

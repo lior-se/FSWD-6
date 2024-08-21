@@ -32,15 +32,15 @@ function ShopCollection() {
         <h1 className="shop-name">{shop.shopname}</h1>
         <button className="add-game-button">Add a New Game</button>
       </div>
-      <div className="games-container">
+      <div className="shop-games-container">
         {games.map((game) => (
           <div 
             key={game._id} 
-            className="game-card"
+            className="shop-game-card"
             onClick={() => handleGameClick(game._id)}
           >
-            <img src={game.cover} alt={game.title} className="game-cover" />
-            <h3 className="game-title">{game.title}</h3>
+            <img src={game.cover} alt={game.title} className="shop-game-cover" />
+            <h3 className="shop-game-title">{game.title}</h3>
           </div>
         ))}
       </div>
