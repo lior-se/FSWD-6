@@ -5,7 +5,7 @@
     width:100vw;
     height: 100vh;
     padding: 20px;
-    margin-top: 10px; /* Adjust based on the navbar height */
+    margin-top: 100px; /* Adjust based on the navbar height */
   }
   
   .user-profile-page h1 {
