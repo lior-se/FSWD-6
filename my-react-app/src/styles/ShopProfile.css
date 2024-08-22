@@ -1,22 +1,18 @@
-body, html {
-    margin: 0;
-    padding: 0;
-    width: 100vw;
-    height: 100vh;
-    box-sizing: border-box;
-  }
-  
   .shop-profile-page {
-    font-family: Arial, sans-serif;
     color: white;
     background-color: #1b1b1d;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: 90vh;
+    width: 100vw;
     padding: 20px;
-    margin-top: 70px; /* Adjust based on the navbar height */
   }
   
   .shop-profile-page h1 {
     font-size: 2.5rem;
-    margin-bottom: 20px;
+    margin: 20px 0;
   }
   
   .shop-profile {
@@ -24,6 +20,7 @@ body, html {
     padding: 20px;
     border-radius: 10px;
     max-width: 600px;
+    width: 100%;
     margin: auto;
   }
   
@@ -35,10 +32,11 @@ body, html {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
+    
   }
   
   .shop-profile-field input {
-    width: 100%;
+    width: 95%;
     padding: 10px;
     border: none;
     border-radius: 5px;
@@ -51,8 +49,8 @@ body, html {
     cursor: not-allowed;
   }
   
-  button {
-    background-color: #5A67D8;
+  .shop-profile-button {
+    background-color: #2a348d;
     color: white;
     padding: 10px 20px;
     border: none;

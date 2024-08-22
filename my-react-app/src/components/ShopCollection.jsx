@@ -9,18 +9,22 @@ function ShopCollection() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchGames = async () => {
-      try {
-        const gamePromises = shop.Games.map((gameId) => getGameById(gameId));
-        const gamesData = await Promise.all(gamePromises);
-        setGames(gamesData);
-      } catch (error) {
-        console.error("Error fetching games:", error);
-      }
-    };
+    if (shop && shop.Games) { // Check if shop and shop.Games exist
+      const fetchGames = async () => {
+        try {
+          const gamePromises = shop.Games.map((gameId) => getGameById(gameId));
+          const gamesData = await Promise.all(gamePromises);
+          setGames(gamesData);
+        } catch (error) {
+          console.error("Error fetching games:", error);
+        }
+      };
 
-    fetchGames();
-  }, [shop.Games]);
+      fetchGames();
+    } else {
+      console.warn("No games found or shop object is null.");
+    }
+  }, [shop]);
 
   const handleGameClick = (gameId) => {
     navigate(`/shop/collection/${gameId}`)

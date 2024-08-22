@@ -3,37 +3,42 @@
     font-family: Arial, sans-serif;
     background-color: #1b1b1d;
     width: 100vw;
-    height: 90vh;
+    height: 100vh;
     padding: 20px;
-    padding-bottom: 100px;
+    padding-top: 100px;
   }
   
   .game-collection-page h1 {
+    color: white;
     font-size: 2.5rem;
     margin-bottom: 20px;
   }
   
   .game-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 games per row */
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
     gap: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 2%;
   }
   
   .game-slot {
     display: flex;
-    background-color: #333;
+    background-color: #f4edde;
     padding: 10px;
     border-radius: 10px;
+    width: 420px;
   }
   
   .game-cover {
-    width: 100px;
+    width: 250px;
     height: auto;
     border-radius: 5px;
   }
   
   .game-info {
-    margin-left: 15px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -41,12 +46,11 @@
   
   .game-title {
     font-size: 1.2rem;
-    margin: 0;
+    padding-bottom: 10px;
     color:cyan !important;
   }
   
   .game-developer {
     font-size: 1rem;
-    color: #ccc;
+    color: #b8b8b8;
   }
-  

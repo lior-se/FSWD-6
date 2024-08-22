@@ -35,7 +35,7 @@ const RegisterShop = () => {
       await createShop(newShop);
       localStorage.setItem('shop', JSON.stringify(newShop));
       alert('Registration successful');
-      navigate('/shop');
+      navigate('/shop/collection');
     } catch (error) {
       alert('Error registering user');
       console.error('Error registering user:', error);

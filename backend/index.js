@@ -157,6 +157,17 @@ app.post('/api/register-shop', async (req, res) => {
   }
 });
 
+app.get('/api/games', async (req, res) => {
+  try {
+    const allGames = await Game.find().sort({ releaseDate: -1 });
+    res.status(200).json(allGames);
+  } catch (error) {
+    console.error('Error fetching all games:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+
 app.get('/api/games/latest', async (req, res) => {
   try {
     const latestGames = await Game.find().sort({ releaseDate: -1 }).limit(6); // Adjust the limit as needed

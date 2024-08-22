@@ -2,7 +2,7 @@
 * {
     margin: 0;
     padding: 0;
-
+  
   }
   
   /* Style for the body */
@@ -11,6 +11,8 @@
     margin: 0;
     padding: 0;
     height: 100%;
+    overflow-x: hidden;
+    background-color: #1b1b1d;
   }
   
   /* Sticky Navbar */
@@ -52,7 +54,6 @@
   /* Responsive design for smaller screens */
   @media (max-width: 768px) {
     .nav-list {
-      flex-direction: column; /* Stack items vertically */
       align-items: center; /* Center the items */
     }
   

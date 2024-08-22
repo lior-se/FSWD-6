@@ -11,7 +11,7 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      <h1 className="home-title">Welcome to GameStore</h1>
+      <h1 className="home-title">Welcome to Steak GameStore</h1>
       <div className="button-group">
         <button className="home-button" onClick={() => navigate('/login')}>Login</button>
         <button className="home-button" onClick={() => navigate('/register-shop')}>Register as a Shop</button>

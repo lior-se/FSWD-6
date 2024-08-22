@@ -1,28 +1,32 @@
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
-import { getLatestGames } from '../server'; 
+import { getLatestGames, getAllGames } from '../server'; 
 import { useNavigate } from "react-router-dom"; 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import '../styles/GameStore.css'; 
 
 function GameStore() {
-  const [games, setGames] = useState([]);
+  const [latestGames, setLatestGames] = useState([]);
+  const [allGames, setAllGames] = useState([]);
   const [filteredGames, setFilteredGames] = useState([]);
   const [selectedGenre, setSelectedGenre] = useState('All');
-  const [loading, setLoading] = useState(true); // Add loading state
+  const [searchTerm, setSearchTerm] = useState('');
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchGames = async () => {
       try {
-        const latestGames = await getLatestGames();
-        setGames(latestGames);
-        setFilteredGames(latestGames);
+        const latestGamesResponse = await getLatestGames();
+        const allGamesResponse = await getAllGames();
+        setLatestGames(latestGamesResponse);
+        setAllGames(allGamesResponse);
+        setFilteredGames(allGamesResponse);
       } catch (error) {
-        console.error("Error fetching latest games:", error);
+        console.error("Error fetching games:", error);
       } finally {
-        setLoading(false); // Set loading to false after games are fetched
+        setLoading(false);
       }
     };
 
@@ -31,11 +35,27 @@ function GameStore() {
 
   const filterGames = (genre) => {
     setSelectedGenre(genre);
-    if (genre === 'All') {
-      setFilteredGames(games);
-    } else {
-      setFilteredGames(games.filter(game => game.genres.includes(genre)));
+    filterBySearchTermAndGenre(searchTerm, genre);
+  };
+
+  const handleSearch = (e) => {
+    const term = e.target.value;
+    setSearchTerm(term);
+    filterBySearchTermAndGenre(term, selectedGenre);
+  };
+
+  const filterBySearchTermAndGenre = (term, genre) => {
+    let filtered = allGames;
+
+    if (genre !== 'All') {
+      filtered = filtered.filter(game => game.genres.includes(genre));
     }
+
+    if (term) {
+      filtered = filtered.filter(game => game.title.toLowerCase().includes(term.toLowerCase()));
+    }
+
+    setFilteredGames(filtered);
   };
 
   const settings = {
@@ -48,19 +68,18 @@ function GameStore() {
   };
 
   if (loading) {
-    return <div className="game-store"><h2>Loading...</h2></div>; // Render loading state
+    return <div className="game-store"><h2>Loading...</h2></div>;
   }
 
   const handleGameClick = (gameId) => {
-    navigate(`/user/store/${gameId}`); // Navigate to GamePage with gameId
+    navigate(`/user/store/${gameId}`);
   };
-
 
   return (
     <div className="game-store">
       <h2 className="latest-releases">Latest Releases</h2>
       <Slider {...settings} className="game-carousel">
-        {games.map((game) => (
+        {latestGames.map((game) => (
           <div 
           key={game._id} 
           className="game-slide"
@@ -88,6 +107,15 @@ function GameStore() {
             {genre}
           </button>
         ))}
+      </div>
+
+      <div className="search-bar">
+        <input 
+          type="text" 
+          placeholder="Search by game name..." 
+          value={searchTerm}
+          onChange={handleSearch}
+        />
       </div>
 
       <div className="game-list">

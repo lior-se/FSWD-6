@@ -50,7 +50,7 @@ const gameData = {
               <img src={game.cover} alt={`${game.title} cover`} className="game-cover" />
               <div className="game-info">
                 <h2 className="game-title">{game.title}</h2>
-                <p className="game-developer">{game.developer}</p>
+                <h3 className="game-developer">{game.developer}</h3>
               </div>
             </div>
           ))}

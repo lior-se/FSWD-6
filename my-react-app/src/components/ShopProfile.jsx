@@ -131,7 +131,8 @@ const ShopProfile = () => {
                   value={passwordInput}
                   onChange={(e) => setPasswordInput(e.target.value)}
                 />
-                <button onClick={handlePasswordVisibility}>Show Password</button>
+                <button className='shop-profile-button'
+                 onClick={handlePasswordVisibility}>Show Password</button>
               </>
             )}
           </div>
@@ -182,9 +183,13 @@ const ShopProfile = () => {
         </div>
 
         {editing ? (
-          <button onClick={handleSaveClick}>Save</button>
+          <button className='shop-profile-button'
+          onClick={handleSaveClick}>
+            Save</button>
         ) : (
-          <button onClick={handleEditClick}>Edit Profile</button>
+          <button className='shop-profile-button'
+          onClick={handleEditClick}>
+            Edit Profile</button>
         )}
       </div>
     </div>

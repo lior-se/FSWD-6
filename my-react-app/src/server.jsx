@@ -24,6 +24,16 @@ export const createShop = async (shop) => {
   return postRequest('/api/register-shop', shop);
 };
 
+export const getAllGames = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/api/games`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching all games:', error);
+    throw error;
+  }
+};
+
 export const getLatestGames = async () => {
   try {
     const response = await axios.get(`${API_URL}/api/games/latest`);
