@@ -32,6 +32,7 @@
     height: 100%;
     justify-content: space-between; /* Distribute space between content */
     overflow-y: auto;
+    gap: 20px;
 }
   
 .game-image {
@@ -71,7 +72,8 @@
 }
   
 .game-details {
-    flex: 1;
+    display: flex;
+    flex-direction: column;
     margin-left: 20px;
     width: 100%;
     overflow-y: auto;
@@ -79,6 +81,10 @@
   
 .age-rating, .purchase-info, .meta-info, .features {
     margin-bottom: 20px;
+}
+.purchase-info{
+    display: flex;
+    flex-direction: column;
 }
   
 .price {
@@ -117,7 +123,7 @@ button {
   
 .game-description {
     margin-top: 20px;
-    width: 100%;
+    width: 800px;
 }
   
 .game-description p {
@@ -154,9 +160,69 @@ button {
     border: none;
     cursor: pointer;
     border-radius: 5px;
+    width: 20%;
   }
   
   .play-button:hover {
     background-color: #218838;
   }
   
+  @media (max-width: 768px) {
+    .game-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .game-header h1 {
+        font-size: 2rem;
+        margin-bottom: 10px;
+        margin-top: 22px;
+    }
+
+    .game-content {
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    .game-image {
+        max-width: 90%;
+    }
+
+    .game-details {
+        margin-left: 0;
+        margin-top: 20px;
+    }
+    .game-description{
+        width: 350px;
+        max-height: 100px;
+        overflow-y: auto;
+    }
+
+    .thumbnails {
+        justify-content: center;
+    }
+
+    .thumbnails img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .game-description p {
+        font-size: 1rem;
+    }
+
+    .price {
+        font-size: 20px;
+    }
+
+    .pre-purchase, .play-button, button {
+        padding: 8px 15px;
+        font-size: 1rem;
+        margin-right: 0;
+        width: 30%;
+    }
+
+    .features span {
+        padding: 2px;
+        margin-right: 5px;
+    }
+}

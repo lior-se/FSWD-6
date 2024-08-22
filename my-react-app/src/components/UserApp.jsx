@@ -39,11 +39,18 @@ const Navbar = () => {
 
     return (
         <nav className="navbar">
-        <ul className="nav-list">
-            <li className='nav-item' onClick={() => navigate('/user/store')}> Store </li>
-            <li className="nav-item" onClick={() => navigate('/user/collection')}>Library</li>
-            <li className="nav-item" onClick={() => navigate('/user/profil')}>Profile</li>
-        </ul>
+            <ul className="nav-list">
+                <li className='nav-item' onClick={() => navigate('/user/store')}>Store</li>
+                <li className="nav-item" onClick={() => navigate('/user/collection')}>Library</li>
+                <li className="nav-item" onClick={() => navigate('/user/profil')}>Profile</li>
+                <div className="nav-right">
+                    <li className="nav-item" onClick={() => navigate('/user/cart')}>Cart</li>
+                    <li className="nav-item" onClick={() => {
+                        localStorage.removeItem('user'); // Assuming logout clears user from local storage
+                        navigate('/');
+                    }}>Logout</li>
+                </div>
+            </ul>
         </nav>
     );
 }

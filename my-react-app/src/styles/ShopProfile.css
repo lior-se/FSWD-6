@@ -8,6 +8,7 @@
     height: 90vh;
     width: 100vw;
     padding: 20px;
+    box-sizing: border-box;
   }
   
   .shop-profile-page h1 {
@@ -57,9 +58,16 @@
     cursor: pointer;
     border-radius: 5px;
     margin-top: 20px;
+    min-width: 120px;
   }
   
   button:hover {
     background-color: #6b78e8;
   }
   
+
+  @media (max-width: 768px) {
+    .shop-profile{
+      width: 90%;
+    }
+  }

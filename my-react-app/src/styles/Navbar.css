@@ -50,17 +50,40 @@
   .nav-item:hover {
     background-color: #555; /* Slightly lighter background on hover */
   }
+
+  .nav-right {
+    margin-left: auto; /* Pushes the container to the right */
+    display: flex; /* Aligns the right items horizontally */
+}
+
+/* Ensure right-aligned items have the same styling */
+  .nav-right .nav-item {
+    padding: 10px 15px; /* Consistent padding */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
   
   /* Responsive design for smaller screens */
   @media (max-width: 768px) {
     .nav-list {
-      align-items: center; /* Center the items */
+        flex-wrap: wrap; /* Allow items to wrap to the next line */
+        justify-content: space-around; /* Adjust to distribute items evenly */
     }
-  
+
     .nav-item {
-      margin: 10px 0; /* Adjust margin for vertical stacking */
+        margin: 5px 0; /* Adjust margin for vertical stacking */
+        padding: 5px 10px; /* Reduce padding for smaller buttons */
+        font-size: 0.8rem; /* Reduce font size */
     }
-  }
+
+    .nav-right {
+        flex-direction: row; /* Keep right items in a row */
+        margin-left: 0;
+    }
+
+    .nav-right .nav-item {
+        padding: 5px 10px; /* Consistent reduced padding for right items */
+    }
+}
   
   /* Additional fix to ensure content below the navbar isn't hidden */
   .main-app {

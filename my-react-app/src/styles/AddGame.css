@@ -61,8 +61,23 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    min-width: 150px;
 }
 
 .add-button:hover {
     background-color: #434190;
+}
+
+@media (max-width: 768px) {
+
+    .add-game-container h1{
+        margin-top: 12%;
+    }
+    .form-group{
+        margin-left: 15%;
+        width: 140%;
+    }
+    .add-button {
+        margin-left: 30%;
+    }
 }

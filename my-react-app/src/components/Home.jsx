@@ -11,7 +11,12 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      <h1 className="home-title">Welcome to Steak GameStore</h1>
+      <h1 className="home-title">Welcome to MEATS GameStore</h1>
+      <img 
+        src="https://i.postimg.cc/QMN00MTF/meats.png" 
+        alt="GameStore Logo" 
+        className="home-image"
+      />
       <div className="button-group">
         <button className="home-button" onClick={() => navigate('/login')}>Login</button>
         <button className="home-button" onClick={() => navigate('/register-shop')}>Register as a Shop</button>

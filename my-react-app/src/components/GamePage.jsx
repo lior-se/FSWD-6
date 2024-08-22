@@ -78,8 +78,18 @@ const GamePage = () => {
         </div>
         
         <div className="game-content">
-          <div className="game-image">
-            <img src={displayedImage} alt={gameData.title} />
+          <div className="game-media">
+            <div className="game-image">
+              <img src={displayedImage} alt={gameData.title} />
+            </div>
+            <div className="game-description">
+              <p>{gameData.description}</p>
+              <div className="genres">
+                {gameData.genres.map((genre, index) => (
+                  <span key={index}>{genre}</span>
+                ))}
+              </div>
+            </div>
           </div>
           
           <div className="game-details">
@@ -96,22 +106,22 @@ const GamePage = () => {
               ) : (
                 <>
                   <button className="pre-purchase" onClick={handlePurchase}>Purchase</button>
-                  <button onClick={handleAddToCart}>Add To Cart</button>
+                  <button className="pre-purchase" onClick={handleAddToCart}>Add To Cart</button>
                 </>
               )}
             </div>
-  
+    
             <div className="meta-info">
               <p>Developer: {gameData.developer}</p>
               <p>Release Date: {gameData.releaseDate}</p>
             </div>
-  
+    
             <div className="features">
               <span>Cloud Saves</span>
               <span>Controller Support</span>
               <span>Single Player</span>
             </div>
-
+    
             <div className="thumbnails">
               <img 
                 src={gameData.cover} 
@@ -131,16 +141,6 @@ const GamePage = () => {
             </div>
           </div>
         </div>
-        
-        <div className="game-description">
-          <p>{gameData.description}</p>
-          <div className="genres">
-            {gameData.genres.map((genre, index) => (
-              <span key={index}>{genre}</span>
-            ))}
-          </div>
-        </div>
-        
       </div>
     );
 };
