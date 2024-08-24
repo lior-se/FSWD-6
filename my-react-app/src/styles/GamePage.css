@@ -151,7 +151,9 @@ button {
   .game-slot:hover {
     background-color: #444; /* Optional: Add a hover effect */
   }
-  
+  .pre-purchase{
+    width: 20%;
+  }
   .play-button {
     background-color: #28a745; /* Green for play */
     color: white;
