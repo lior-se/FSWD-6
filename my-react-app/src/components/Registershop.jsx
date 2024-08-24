@@ -35,7 +35,7 @@ const RegisterShop = () => {
       await createShop(newShop);
       localStorage.setItem('shop', JSON.stringify(newShop));
       alert('Registration successful');
-      navigate('/shop/collection');
+      navigate('/login');
     } catch (error) {
       alert('Error registering user');
       console.error('Error registering user:', error);
@@ -76,7 +76,7 @@ const RegisterShop = () => {
             <label className="label">address:</label>
             <input type="text" className="input" value={address} onChange={(e) => setAdress(e.target.value)} required />
           </div>
-          <button type="submit" className="button">Complete Registration</button>
+          <button id='registernewshopconfirm' type="submit" className="button">Complete Registration</button>
         </form>
     </div>
     </div>

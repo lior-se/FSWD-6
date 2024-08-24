@@ -44,6 +44,10 @@
     background-color: #444;
     color: white;
   }
+
+  #ShowPasswordInput{
+    margin-top: 10px;
+  }
   
   .shop-profile-field input[disabled] {
     background-color: #555;

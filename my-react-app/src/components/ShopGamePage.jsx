@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getGameById, updateGame } from '../server'; // Import the new updateGame function
+import { getGameById, updateGame } from '../server';
 import '../styles/GamePage.css';
+import '../styles/ShopGamePage.css';
 
 const ShopGamePage = () => {
-    const { id } = useParams(); // Get gameId from URL
+    const { id } = useParams();
     const [gameData, setGameData] = useState(null);
     const [displayedImage, setDisplayedImage] = useState('');
-    const [isEditing, setIsEditing] = useState({}); // Track editing state for each field
-    const [editValues, setEditValues] = useState({}); // Track current values being edited
+    const [isEditing, setIsEditing] = useState({});
+    const [editValues, setEditValues] = useState({});
+    const [newThumbnailUrl, setNewThumbnailUrl] = useState(''); // State for new thumbnail URL
+    const [addingThumbnail, setAddingThumbnail] = useState(false); // State for showing/hiding the input for new thumbnail
 
     useEffect(() => {
         const fetchGame = async () => {
             try {
-                const game = await getGameById(id); // Fetch the game by ID
+                const game = await getGameById(id);
                 setGameData(game);
                 setDisplayedImage(game.cover);
             } catch (error) {
@@ -25,7 +28,7 @@ const ShopGamePage = () => {
     }, [id]);
 
     if (!gameData) {
-        return <div>Loading...</div>; // Show loading state while fetching data
+        return <div>Loading...</div>;
     }
 
     const handleThumbnailClick = (mediaUrl) => {
@@ -65,9 +68,22 @@ const ShopGamePage = () => {
         setDisplayedImage(e.target.value);
     };
 
+    const handleAddThumbnail = () => {
+        if (newThumbnailUrl) {
+            const updatedMedia = [...gameData.media, newThumbnailUrl];
+            setGameData({ ...gameData, media: updatedMedia });
+            setNewThumbnailUrl('');
+
+            // Optionally, update the game with the new thumbnail in the backend
+            updateGame(id, { media: updatedMedia })
+                .then(() => console.log('Thumbnail added successfully'))
+                .catch((error) => console.error('Error adding thumbnail:', error));
+        }
+        setAddingThumbnail(false);
+    };
+
     const saveChanges = async (field) => {
         setIsEditing({ ...isEditing, [field]: false });
-        console.log(`${field} updated to:`, editValues[field]);
 
         try {
             await updateGame(id, { [field]: editValues[field] });
@@ -80,163 +96,206 @@ const ShopGamePage = () => {
     return (
         <div className="game-page">
             <div className="game-header">
-                <h1 
+                <h1
                     onDoubleClick={() => handleDoubleClick('title')}
                     onBlur={() => handleBlur('title')}
                 >
-                    {isEditing.title ? 
+                    {isEditing.title ? (
                         <div>
-                            <input 
-                                type="text" 
-                                value={editValues.title || ''} 
+                            <input
+                                type="text"
+                                value={editValues.title || ''}
                                 onChange={(e) => handleChange(e, 'title')}
                                 onBlur={() => handleBlur('title')}
                                 onKeyDown={(e) => handleKeyDown(e, 'title')}
                                 autoFocus
                             />
-                            <button onClick={() => saveChanges('title')}>Update</button>
-                        </div> : 
+                            <button className='ConfirmEdit' onClick={() => saveChanges('title')}>Update</button>
+                        </div>
+                    ) : (
                         gameData.title
-                    }
+                    )}
                 </h1>
             </div>
-            
+
             <div className="game-content">
-                <div className="game-image">
-                    {isEditing.cover ? 
-                        <div>
-                            <input 
-                                type="text" 
-                                value={editValues.cover || ''} 
-                                onChange={handleImageChange}
-                                onBlur={() => handleBlur('cover')}
-                                onKeyDown={(e) => handleKeyDown(e, 'cover')}
-                                autoFocus
+                <div className="game-media">
+                    <div className="game-image">
+                        {isEditing.cover ? (
+                            <div>
+                                <input
+                                    type="text"
+                                    value={editValues.cover || ''}
+                                    onChange={handleImageChange}
+                                    onBlur={() => handleBlur('cover')}
+                                    onKeyDown={(e) => handleKeyDown(e, 'cover')}
+                                    autoFocus
+                                />
+                                <button className='ConfirmEdit' onClick={() => saveChanges('cover')}>Update</button>
+                            </div>
+                        ) : (
+                            <img
+                                src={displayedImage}
+                                alt={gameData.title}
+                                onDoubleClick={() => handleDoubleClick('cover')}
                             />
-                            <button onClick={() => saveChanges('cover')}>Update</button>
-                        </div> :
-                        <img 
-                            src={displayedImage} 
-                            alt={gameData.title} 
-                            onDoubleClick={() => handleDoubleClick('cover')}
-                        />
-                    }
+                        )}
+                    </div>
+
+                    <div className="game-description">
+                        <p
+                            onDoubleClick={() => handleDoubleClick('description')}
+                            onBlur={() => handleBlur('description')}
+                        >
+                            {isEditing.description ? (
+                                <div>
+                                    <textarea
+                                        value={editValues.description || ''}
+                                        onChange={(e) => handleChange(e, 'description')}
+                                        onBlur={() => handleBlur('description')}
+                                        onKeyDown={(e) => handleKeyDown(e, 'description')}
+                                        autoFocus
+                                    />
+                                    <button className='ConfirmEdit' onClick={() => saveChanges('description')}>Update</button>
+                                </div>
+                            ) : (
+                                gameData.description
+                            )}
+                        </p>
+                        <div className="genres">
+                            {isEditing.genres ? (
+                                gameData.genres.map((genre, index) => (
+                                    <div key={index}>
+                                        <input
+                                            type="text"
+                                            value={editValues.genres[index] || ''}
+                                            onChange={(e) => handleGenreChange(e, index)}
+                                            onBlur={() => handleBlur('genres')}
+                                            onKeyDown={(e) => handleKeyDown(e, 'genres')}
+                                            autoFocus
+                                        />
+                                        <button className='ConfirmEdit' onClick={() => saveChanges('genres')}>Update</button>
+                                    </div>
+                                ))
+                            ) : (
+                                gameData.genres.map((genre, index) => (
+                                    <span
+                                        key={index}
+                                        onDoubleClick={() => handleDoubleClick('genres')}
+                                    >
+                                        {genre}
+                                    </span>
+                                ))
+                            )}
+                        </div>
+                    </div>
                 </div>
-                
+
                 <div className="game-details">
                     <div className="purchase-info">
-                        <span>Base Game</span>
-                        <span 
+                        <span>Game Price</span>
+                        <span
                             className="price"
                             onDoubleClick={() => handleDoubleClick('price')}
                             onBlur={() => handleBlur('price')}
                         >
-                            {isEditing.price ? 
+                            {isEditing.price ? (
                                 <div>
-                                    <input 
-                                        type="text" 
-                                        value={editValues.price || ''} 
+                                    <input
+                                        type="text"
+                                        value={editValues.price || ''}
                                         onChange={(e) => handleChange(e, 'price')}
                                         onBlur={() => handleBlur('price')}
                                         onKeyDown={(e) => handleKeyDown(e, 'price')}
                                         autoFocus
                                     />
-                                    <button onClick={() => saveChanges('price')}>Update</button>
-                                </div> : 
+                                    <button className='ConfirmEdit' onClick={() => saveChanges('price')}>Update</button>
+                                </div>
+                            ) : (
                                 `$${gameData.price}`
-                            }
+                            )}
                         </span>
                     </div>
-      
+
                     <div className="meta-info">
-                        <p 
+                        <p
                             onDoubleClick={() => handleDoubleClick('developer')}
                             onBlur={() => handleBlur('developer')}
                         >
-                            Developer: {isEditing.developer ? 
+                            Developer: {isEditing.developer ? (
                                 <div>
-                                    <input 
-                                        type="text" 
-                                        value={editValues.developer || ''} 
+                                    <input
+                                        type="text"
+                                        value={editValues.developer || ''}
                                         onChange={(e) => handleChange(e, 'developer')}
                                         onBlur={() => handleBlur('developer')}
                                         onKeyDown={(e) => handleKeyDown(e, 'developer')}
                                         autoFocus
                                     />
-                                    <button onClick={() => saveChanges('developer')}>Update</button>
-                                </div> : 
+                                    <button className='ConfirmEdit' onClick={() => saveChanges('developer')}>Update</button>
+                                </div>
+                            ) : (
                                 gameData.developer
-                            }
+                            )}
                         </p>
-                        <p 
+                        <p
                             onDoubleClick={() => handleDoubleClick('releaseDate')}
                             onBlur={() => handleBlur('releaseDate')}
                         >
-                            Release Date: {isEditing.releaseDate ? 
+                            Release Date: {isEditing.releaseDate ? (
                                 <div>
-                                    <input 
-                                        type="text" 
-                                        value={editValues.releaseDate || ''} 
+                                    <input
+                                        type="text"
+                                        value={editValues.releaseDate || ''}
                                         onChange={(e) => handleChange(e, 'releaseDate')}
                                         onBlur={() => handleBlur('releaseDate')}
                                         onKeyDown={(e) => handleKeyDown(e, 'releaseDate')}
                                         autoFocus
                                     />
-                                    <button onClick={() => saveChanges('releaseDate')}>Update</button>
-                                </div> : 
+                                    <button className='ConfirmEdit' onClick={() => saveChanges('releaseDate')}>Update</button>
+                                </div>
+                            ) : (
                                 gameData.releaseDate
-                            }
+                            )}
                         </p>
+                    </div>
+
+                    <div className="thumbnails">
+                        <img
+                            src={gameData.cover}
+                            alt="Cover"
+                            onClick={() => handleThumbnailClick(gameData.cover)}
+                            className={displayedImage === gameData.cover ? 'active' : ''}
+                        />
+                        {gameData.media.map((mediaUrl, index) => (
+                            <img
+                                key={index}
+                                src={mediaUrl}
+                                alt={`Screenshot ${index + 1}`}
+                                onClick={() => handleThumbnailClick(mediaUrl)}
+                                className={displayedImage === mediaUrl ? 'active' : ''}
+                            />
+                        ))}
+                        {/* Add Thumbnail Button */}
+                        {addingThumbnail ? (
+                            <div className="add-thumbnail">
+                                <input
+                                    type="text"
+                                    value={newThumbnailUrl}
+                                    onChange={(e) => setNewThumbnailUrl(e.target.value)}
+                                    placeholder="Enter image URL"
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter') handleAddThumbnail();
+                                    }}
+                                />
+                                <button onClick={handleAddThumbnail}>Add</button>
+                            </div>
+                        ) : (
+                            <button className='ConfirmEdit' onClick={() => setAddingThumbnail(true)}>+</button>
+                        )}
                     </div>
                 </div>
             </div>
-            
-            <div className="game-description">
-                <p 
-                    onDoubleClick={() => handleDoubleClick('description')}
-                    onBlur={() => handleBlur('description')}
-                >
-                    {isEditing.description ? 
-                        <div>
-                            <textarea 
-                                value={editValues.description || ''} 
-                                onChange={(e) => handleChange(e, 'description')}
-                                onBlur={() => handleBlur('description')}
-                                onKeyDown={(e) => handleKeyDown(e, 'description')}
-                                autoFocus
-                            />
-                            <button onClick={() => saveChanges('description')}>Update</button>
-                        </div> : 
-                        gameData.description
-                    }
-                </p>
-                <div className="genres">
-                    {isEditing.genres ? 
-                        gameData.genres.map((genre, index) => (
-                            <div key={index}>
-                                <input 
-                                    type="text" 
-                                    value={editValues.genres[index] || ''} 
-                                    onChange={(e) => handleGenreChange(e, index)}
-                                    onBlur={() => handleBlur('genres')}
-                                    onKeyDown={(e) => handleKeyDown(e, 'genres')}
-                                    autoFocus
-                                />
-                                <button onClick={() => saveChanges('genres')}>Update</button>
-                            </div>
-                        )) : 
-                        gameData.genres.map((genre, index) => (
-                            <span 
-                                key={index} 
-                                onDoubleClick={() => handleDoubleClick('genres')}
-                            >
-                                {genre}
-                            </span>
-                        ))
-                    }
-                </div>
-            </div>
-            
         </div>
     );
 };

@@ -70,7 +70,7 @@ const RegisterUser = () => {
             <label className="label">Phone:</label>
             <input type="text" className="input" value={phone} onChange={(e) => setPhone(e.target.value)} required />
           </div>
-          <button type="submit" className="button">Complete Registration</button>
+          <button id='registernewuserconfirm' type="submit" className="button">Complete Registration</button>
         </form>
     </div>
     </div>

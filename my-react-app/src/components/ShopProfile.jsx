@@ -126,6 +126,7 @@ const ShopProfile = () => {
             {!showPassword && (
               <>
                 <input
+                  id='ShowPasswordInput'
                   type="password"
                   placeholder="Enter your password"
                   value={passwordInput}

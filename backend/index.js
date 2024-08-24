@@ -226,6 +226,7 @@ app.put('/api/games/:id', async (req, res) => {
   }
 });
 
+/*
 app.put('/api/users/:username', async (req, res) => {
   const { username } = req.params;
   const { name, email, phone, password } = req.body;
@@ -246,6 +247,57 @@ app.put('/api/users/:username', async (req, res) => {
   }
 });
 
+*/
+
+
+//
+app.put('/api/users/:id', async (req, res) => {
+  const { id } = req.params;
+  const { username, name, email, phone, password, ownedGames } = req.body;
+  console.log('in the box');
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      id,
+      { username, name, email, phone, password, ownedGames },
+      { new: true }
+    );
+    if (!updatedUser) {
+      return res.status(404).send('User not found');
+    }
+    res.json(updatedUser);
+  } catch (error) {
+    console.error('Error updating user:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+
+
+app.put('/api/shops/:id', async (req, res) => {
+  const { id } = req.params;
+  const { shopname, name, email, phone, adress, password, Games } = req.body;
+
+  try {
+    const updatedShop = await Shop.findByIdAndUpdate(
+      id,
+      { shopname, name, email, phone, adress, password, Games },
+      { new: true }
+    );
+    if (!updatedShop) {
+      return res.status(404).send('Shop not found');
+    }
+    res.json(updatedShop);
+  } catch (error) {
+    console.error('Error updating shop:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+
+
+
+
+/*
 
 app.put('/api/shops/:shopname', async (req, res) => {
   const { shopname } = req.params;
@@ -267,7 +319,9 @@ app.put('/api/shops/:shopname', async (req, res) => {
   }
 });
 
-// Add a route to update the shop's Games array
+*/
+
+// Route to update the shop's Games array
 app.put('/api/shop/add-game/:shopId', async (req, res) => {
   const { shopId } = req.params;
   const { gameId } = req.body;

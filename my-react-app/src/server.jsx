@@ -98,9 +98,10 @@ export const updateGame = async (id, gameData) => {
 };
 
 export const updateUserInDatabase = async (userData) => {
-  return putRequest(`/api/users/${userData.username}`, userData);
-};
+  console.log('still in server ', userData._id);
+  return putRequest(`/api/users/${userData._id}`, userData);
+};//username
 
 export const updateShopInDatabase = async (updatedShop) =>{
-  return putRequest(`/api/shops/${updatedShop.shopname}`, updatedShop);
+  return putRequest(`/api/shops/${updatedShop._id}`, updatedShop);
 };
