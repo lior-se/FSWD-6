@@ -17,10 +17,10 @@
   }
 
   .home-image {
-    width: 50%; /* Adjust width as needed */
-    max-width: 300px; /* Prevents the image from being too large */
+    width: 50%;
+    max-width: 300px;
     height: auto;
-    margin-bottom: 2rem; /* Space between the image and buttons */
+    margin-bottom: 2rem;
 }
   
   .button-group {

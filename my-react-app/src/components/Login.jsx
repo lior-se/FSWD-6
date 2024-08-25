@@ -17,7 +17,7 @@ const Login = () => {
         localStorage.setItem('user', JSON.stringify(user));
         alert('Login successful');
         
-        // Navigate based on the type of user
+        // navigate based on the type of user
         if (user.address) {
           navigate('/shop/collection');
         } else {

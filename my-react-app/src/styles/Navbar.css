@@ -1,11 +1,9 @@
-/* Global reset */
 * {
     margin: 0;
     padding: 0;
   
   }
   
-  /* Style for the body */
   html,body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -15,78 +13,75 @@
     background-color: #1b1b1d;
   }
   
-  /* Sticky Navbar */
+
   .navbar {
-    position: fixed; /* Fixed position to keep it at the top of the screen */
-    top: 0; /* Navbar sticks to the top of the viewport */
-    left: 0; /* Align to the left edge */
-    width: 100%; /* Full width */
-    background-color: #333; /* Dark background color */
-    z-index: 1000; /* Ensures the navbar stays on top of other elements */
-    padding: 10px 0; /* Padding for better spacing */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Adds a shadow for depth */
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    background-color: #333; 
+    z-index: 1000; 
+    padding: 10px 0; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
   }
   
-  /* Navbar list */
+
   .nav-list {
-    list-style-type: none; /* Remove bullets */
-    display: flex; /* Display items horizontally */
-    justify-content: center; /* Center the list items */
+    list-style-type: none;
+    display: flex; 
+    justify-content: center;
   }
   
-  /* Navbar items */
+
   .nav-item {
-    margin: 0 15px; /* Spacing between items */
-    color: white; /* Text color */
-    cursor: pointer; /* Pointer cursor on hover */
-    padding: 10px 15px; /* Padding inside the items */
-    text-transform: uppercase; /* Uppercase text */
-    font-weight: bold; /* Bold text */
-    text-decoration: none; /* Remove underline */
-    transition: background-color 0.3s ease; /* Smooth background color change */
+    margin: 0 15px;
+    color: white;
+    cursor: pointer;
+    padding: 10px 15px;
+    text-transform: uppercase;
+    font-weight: bold; 
+    text-decoration: none; 
+    transition: background-color 0.3s ease; 
   }
   
-  /* Navbar item hover effect */
+
   .nav-item:hover {
-    background-color: #555; /* Slightly lighter background on hover */
+    background-color: #555; 
   }
 
   .nav-right {
-    margin-left: auto; /* Pushes the container to the right */
-    display: flex; /* Aligns the right items horizontally */
+    margin-left: auto; 
+    display: flex; 
 }
 
-/* Ensure right-aligned items have the same styling */
   .nav-right .nav-item {
-    padding: 10px 15px; /* Consistent padding */
-    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    padding: 10px 15px; 
+    transition: background-color 0.3s ease; 
 }
   
-  /* Responsive design for smaller screens */
   @media (max-width: 768px) {
     .nav-list {
-        flex-wrap: wrap; /* Allow items to wrap to the next line */
-        justify-content: space-around; /* Adjust to distribute items evenly */
+        flex-wrap: wrap; 
+        justify-content: space-around;
     }
 
     .nav-item {
-        margin: 5px 0; /* Adjust margin for vertical stacking */
-        padding: 5px 10px; /* Reduce padding for smaller buttons */
-        font-size: 0.8rem; /* Reduce font size */
+        margin: 5px 0;
+        padding: 5px 10px;
+        font-size: 0.8rem;
     }
 
     .nav-right {
-        flex-direction: row; /* Keep right items in a row */
+        flex-direction: row; 
         margin-left: 0;
     }
 
     .nav-right .nav-item {
-        padding: 5px 10px; /* Consistent reduced padding for right items */
+        padding: 5px 10px;
     }
 }
   
-  /* Additional fix to ensure content below the navbar isn't hidden */
   .main-app {
-    padding-top: 40px; /* Adjust this value based on the height of your navbar */
+    padding-top: 40px;
   }
   

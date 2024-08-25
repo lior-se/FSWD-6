@@ -18,26 +18,26 @@ const AddGame = () => {
       return;
     }
 
-    const shop = JSON.parse(localStorage.getItem('user')); // Retrieve the shop data from localStorage
+    const shop = JSON.parse(localStorage.getItem('user')); 
 
     const newGame = {
       title,
-      developer: shop.name, // Use the shop's name as the developer
-      releaseDate: new Date().toLocaleDateString(), // Set the release date to today
+      developer: shop.name, 
+      releaseDate: new Date().toLocaleDateString(), 
       description,
-      media: [], // You can later add media upload functionality
+      media: [], 
       cover,
-      genres: genres.split(',').map(genre => genre.trim()), // Convert the genres string to an array
+      genres: genres.split(',').map(genre => genre.trim()), 
       price: parseFloat(price),
     };
 
     try {
-      const createdGame = await createGame(newGame); // Create the game
+      const createdGame = await createGame(newGame); 
       const updatedShop = await updateShopGames(shop._id, createdGame._id);
 
       localStorage.setItem('user', JSON.stringify(updatedShop));
       
-      navigate('/shop/collection'); // Navigate back to the collection after adding the game
+      navigate('/shop/collection'); 
     } catch (error) {
       console.error('Error adding game:', error);
       setErrorMessage('Failed to add the game. Please try again.');

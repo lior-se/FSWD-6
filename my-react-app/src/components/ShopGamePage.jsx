@@ -10,8 +10,8 @@ const ShopGamePage = () => {
     const [displayedImage, setDisplayedImage] = useState('');
     const [isEditing, setIsEditing] = useState({});
     const [editValues, setEditValues] = useState({});
-    const [newThumbnailUrl, setNewThumbnailUrl] = useState(''); // State for new thumbnail URL
-    const [addingThumbnail, setAddingThumbnail] = useState(false); // State for showing/hiding the input for new thumbnail
+    const [newThumbnailUrl, setNewThumbnailUrl] = useState(''); 
+    const [addingThumbnail, setAddingThumbnail] = useState(false); 
 
     useEffect(() => {
         const fetchGame = async () => {
@@ -74,7 +74,6 @@ const ShopGamePage = () => {
             setGameData({ ...gameData, media: updatedMedia });
             setNewThumbnailUrl('');
 
-            // Optionally, update the game with the new thumbnail in the backend
             updateGame(id, { media: updatedMedia })
                 .then(() => console.log('Thumbnail added successfully'))
                 .catch((error) => console.error('Error adding thumbnail:', error));
@@ -276,7 +275,7 @@ const ShopGamePage = () => {
                                 className={displayedImage === mediaUrl ? 'active' : ''}
                             />
                         ))}
-                        {/* Add Thumbnail Button */}
+                        {/* add Thumbnail Button */}
                         {addingThumbnail ? (
                             <div className="add-thumbnail">
                                 <input

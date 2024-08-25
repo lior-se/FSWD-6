@@ -17,7 +17,7 @@ const addGame = async (game) => {
   }
 };
 
-// Example usage:
+
 const newUser = {
   username: 'jane_doe',
   email: 'jane@example.com',
@@ -43,7 +43,6 @@ const fetchGames = async () => {
   }
 };
 
-// Call these functions when needed, for example, on form submission
 addUser(newUser);
 addGame(newGame);
 fetchGames();

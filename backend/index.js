@@ -50,7 +50,6 @@ app.listen(5000, () => {
   console.log('Server is running on port 5000');
 });
 
-//Test functions
 
 app.post('/api/games', async (req, res) => {
   const { title, developer, releaseDate, description, media, cover, genres, price } = req.body;
@@ -75,7 +74,6 @@ app.post('/api/games', async (req, res) => {
   }
 });
 
-// Route to get a game by its ID
 
 
 
@@ -89,21 +87,16 @@ app.post('/api/login', async (req, res) => {
   const { username, password } = req.body;
   
   try {
-    // First, try to find in User collection
     let user = await User.findOne({ username: username, password: password });
-    //console.log(user)
     if (user) {
       return res.status(200).json(user);
     }
 
-    // If not found in User, try to find in Shop collection
     let shop = await Shop.findOne({ shopname: username, password: password });
-    //console.log(shop)
     if (shop) {
       return res.status(200).json(shop);
     }
 
-    // If neither found, return an error
     res.status(401).json({ message: 'Invalid username or password' });
 
   } catch (error) {
@@ -117,14 +110,12 @@ app.post('/api/register-user', async (req, res) => {
   const { username, password, name, email, phone } = req.body;
 
   try {
-    // Check if the username already exists
     const existingUser = await User.findOne({ username });
     const existingShop = await Shop.findOne({ shopname: username });
     if (existingUser || existingShop) {
       return res.status(400).json({ message: 'Username already exists' });
     }
 
-    // Create a new user
     const newUser = new User({ username, password, name, email, phone, ownedGames: [] });
     await newUser.save();
 
@@ -139,14 +130,12 @@ app.post('/api/register-shop', async (req, res) => {
   const { shopname, password, name, email, phone,address } = req.body;
 
   try {
-    // Check if the username already exists
     const existingShop = await Shop.findOne({ shopname });
     const existingUser = await User.findOne({ username: shopname });
     if (existingUser || existingShop) {
       return res.status(400).json({ message: 'Username already exists' });
     }
 
-    // Create a new user
     const newShop = new Shop({ shopname, password, name, email, phone, address, Games: [] });
     await newShop.save();
 
@@ -181,7 +170,6 @@ app.get('/api/games/latest', async (req, res) => {
 app.get('/api/games/:id', async (req, res) => {
   const { id } = req.params;
 
-  // Check if the provided id is a valid ObjectId
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).json({ message: 'Invalid game ID' });
   }
@@ -200,14 +188,11 @@ app.get('/api/games/:id', async (req, res) => {
   }
 });
 
-//Update a game 
-// Add this route to your backend code
 
 app.put('/api/games/:id', async (req, res) => {
   const { id } = req.params;
   const updateData = req.body;
 
-  // Check if the provided id is a valid ObjectId
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).json({ message: 'Invalid game ID' });
   }
@@ -321,13 +306,11 @@ app.put('/api/shops/:shopname', async (req, res) => {
 
 */
 
-// Route to update the shop's Games array
 app.put('/api/shop/add-game/:shopId', async (req, res) => {
   const { shopId } = req.params;
   const { gameId } = req.body;
   console.log("gameID: %s",gameId);
   console.log("shopID: %s",shopId);
-  // Check if the provided shopId is valid
   if (!mongoose.Types.ObjectId.isValid(shopId)) {
     return res.status(400).json({ message: 'Invalid shop ID' });
   }
@@ -335,8 +318,8 @@ app.put('/api/shop/add-game/:shopId', async (req, res) => {
   try {
     const shop = await Shop.findByIdAndUpdate(
       shopId,
-      { $push: { Games: gameId } }, // Push the new game ID to the Games array
-      { new: true } // Return the updated document
+      { $push: { Games: gameId } },
+      { new: true } 
     );
 
     if (shop) {

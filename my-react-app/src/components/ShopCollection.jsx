@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import { getGameById } from "../server"; // Import the function to get game data
-import '../styles/ShopCollection.css'; // Create a CSS file for styling
+import { getGameById } from "../server"; 
+import '../styles/ShopCollection.css'; 
 
 function ShopCollection() {
-  const [shop, setShop] = useState(JSON.parse(localStorage.getItem('user'))); // Retrieve the shop data from localStorage
+  const [shop, setShop] = useState(JSON.parse(localStorage.getItem('user'))); 
   const [games, setGames] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (shop && shop.Games) { // Check if shop and shop.Games exist
+    if (shop && shop.Games) {
       const fetchGames = async () => {
         try {
           const gamePromises = shop.Games.map((gameId) => getGameById(gameId));

@@ -1,25 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getGameById, updateUserInDatabase } from '../server'; // Import a function to fetch a game by ID and update user
+import { getGameById, updateUserInDatabase } from '../server'; 
 import '../styles/GamePage.css';
 
 const GamePage = () => {
-    const { id } = useParams(); // Get gameId from URL
+    const { id } = useParams(); 
     const [gameData, setGameData] = useState(null);
     const [displayedImage, setDisplayedImage] = useState('');
-    const [isOwned, setIsOwned] = useState(false); // State to track if the game is owned
+    const [isOwned, setIsOwned] = useState(false); 
 
     useEffect(() => {
         const fetchGame = async () => {
             try {
-                const game = await getGameById(id); // Fetch the game by ID
+                const game = await getGameById(id); 
                 setGameData(game);
                 setDisplayedImage(game.cover);
 
-                // Check if the user owns this game
                 const user = JSON.parse(localStorage.getItem('user'));
                 if (user && user.ownedGames.includes(id)) {
-                    setIsOwned(true); // Set to true if the user owns the game
+                    setIsOwned(true); 
                 }
             } catch (error) {
                 console.error('Error fetching game data:', error);
@@ -45,8 +44,8 @@ const GamePage = () => {
             const user = JSON.parse(localStorage.getItem('user'));
             if (user && !user.ownedGames.includes(id)) {
                 user.ownedGames.push(id);
-                await updateUserInDatabase(user); // Update the database
-                localStorage.setItem('user', JSON.stringify(user)); // Update localStorage
+                await updateUserInDatabase(user); 
+                localStorage.setItem('user', JSON.stringify(user)); 
                 setIsOwned(true);
                 alert('Game purchased and added to your library!');
             } else {
@@ -59,7 +58,7 @@ const GamePage = () => {
     };
 
     if (!gameData) {
-        return <div>Loading...</div>; // Show loading state while fetching data
+        return <div>Loading...</div>; 
     }
 
     const handleThumbnailClick = (mediaUrl) => {
@@ -67,8 +66,9 @@ const GamePage = () => {
     };
 
     const handlePlayClick = () => {
-        // Handle logic to play the game
-        console.log(`Playing ${gameData.title}`);
+      const url = "https://dinos-lemon.vercel.app"; 
+      window.open(url, '_blank');
+      console.log(`Playing ${gameData.title}`);
     };
 
     return (

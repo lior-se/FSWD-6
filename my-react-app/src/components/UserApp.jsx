@@ -8,7 +8,6 @@ import CartPage from './CartPage';
 import '../styles/Navbar.css'
 const UserApp = () => {
     const navigate = useNavigate();
-    //const [activeSection, setActiveSection] = useState(null);
     
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem('user'));

@@ -17,7 +17,6 @@ const ShopProfile = () => {
     const storedShop = JSON.parse(localStorage.getItem('user'));
     if (storedShop) {
       setShop(storedShop);
-      // Divide the address into its parts
       const addressParts = storedShop.address.split(', ');
       setStreetNumber(addressParts[0] || '');
       setStreet(addressParts[1] || '');
