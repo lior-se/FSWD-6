@@ -12,7 +12,7 @@ const ShopApp = () => {
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem('user'));
         if (!user || !user.shopname) {
-            navigate('/'); // Redirect to home if no shopname is found
+            navigate('/'); 
         }
     }, [navigate]);
     

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { createGame,updateShopGames } from '../server'; // Import the function to create a game
-import '../styles/AddGame.css'; // Create a CSS file for styling
+import { createGame,updateShopGames } from '../server'; 
+import '../styles/AddGame.css';
 
 const AddGame = () => {
   const [title, setTitle] = useState('');

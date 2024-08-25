@@ -45,7 +45,7 @@ const Navbar = () => {
                 <div className="nav-right">
                     <li className="nav-item" onClick={() => navigate('/user/cart')}>Cart</li>
                     <li className="nav-item" onClick={() => {
-                        localStorage.removeItem('user'); // Assuming logout clears user from local storage
+                        localStorage.removeItem('user'); 
                         navigate('/');
                     }}>Logout</li>
                 </div>

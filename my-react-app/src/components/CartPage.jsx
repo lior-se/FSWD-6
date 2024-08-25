@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getGameById, updateUserInDatabase } from '../server'; // Function to fetch game data by ID and update user
-import '../styles/CartPage.css';
+import { getGameById, updateUserInDatabase } from '../server';
 
 const CartPage = () => {
     const [cartGames, setCartGames] = useState([]);
@@ -32,11 +31,11 @@ const CartPage = () => {
 
             if (newOwnedGames.length > 0) {
                 user.ownedGames.push(...newOwnedGames);
-                await updateUserInDatabase(user); // Update the database
-                localStorage.setItem('user', JSON.stringify(user)); // Update localStorage
+                await updateUserInDatabase(user); 
+                localStorage.setItem('user', JSON.stringify(user)); 
                 alert('Games purchased and added to your library!');
 
-                // Remove purchased games from the cart
+               
                 const remainingGames = cartGames.filter(game => !newOwnedGames.includes(game._id));
                 localStorage.setItem('cart', JSON.stringify(remainingGames.map(game => game._id)));
                 setCartGames(remainingGames);
