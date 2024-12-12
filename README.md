@@ -37,31 +37,30 @@
 
 ---
 
-## 📂 Project Structure
+## Screenshots
+Entrance page 
+![image](https://github.com/user-attachments/assets/e90fb0b3-bc77-49d4-874e-6431547f87ea)
 
-### Frontend
-- `App.js`: The main React component handling routes.
-- **Components:**
-  - `Home`: Landing page for the application.
-  - `Login`: User and shop login page.
-  - `RegisterUser` and `RegisterShop`: Registration pages for users and shops.
-  - `UserApp` and `ShopApp`: Dashboards for users and shops, respectively.
+Register page
+![image](https://github.com/user-attachments/assets/6fbe4229-2591-4a8f-b216-0c1fdc83adcf)
 
-### Backend
-- **API Endpoints:**
-  - `/api/register-user` and `/api/register-shop`: Register new users or shops.
-  - `/api/login`: Log in for both users and shops.
-  - `/api/games`: Manage games (add, update, fetch).
-- **Schemas:**
-  - `Game`: Contains game details like title, genres, and price.
-  - `User`: Stores user data and owned games.
-  - `Shop`: Stores shop information and their game inventory.
+Shop Collection page
+![image](https://github.com/user-attachments/assets/13f2631e-adb0-4f9a-83f2-056731946bbe)
 
----
+Game Page(Shop view)
+![image](https://github.com/user-attachments/assets/7b20aefe-430a-45ea-9875-41aa87a4bb85)
 
-## 🚀 Getting Started
+Game Page (User View)
+![image](https://github.com/user-attachments/assets/58776959-22a2-43ab-8419-1110d7b16c09)
 
-### Prerequisites
-Make sure you have the following installed:
-- **Node.js** (v16 or later)
-- **MongoDB**
+Game Store
+![image](https://github.com/user-attachments/assets/49c96c5c-ef9d-4e6d-ad20-031c214544b1)
+
+Game Collection (User view)
+![image](https://github.com/user-attachments/assets/860f9b23-bdd3-491a-a221-a156851730b6)
+
+Shop Edit Profile
+![image](https://github.com/user-attachments/assets/bb01dbd8-0cd9-4a94-baec-1fa264909611)
+
+User Edit Profile
+![image](https://github.com/user-attachments/assets/0d33737f-0c39-4881-a6dc-647f8f169dbb)
