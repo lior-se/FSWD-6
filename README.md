@@ -1,6 +1,6 @@
 # 🎮 GameShop Full-Stack Project
 
-**GameShop** is the final and sixth project of the FullStack yearly course, completed in the last year of studies. It is a web-based application that emulates a game shop. The platform provides features for shops to log in and manage their game catalog and for users to browse, buy games, and manage their personal game library.
+**GameShop** is the sixth and final project of the FullStack yearly course, completed in the last year of studies. It is a web-based application that emulates a game shop. The platform provides features for shops to log in and manage their game catalog and for users to browse, buy games, and manage their personal game library.
 
 ---
 
